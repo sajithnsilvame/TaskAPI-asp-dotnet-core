@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using TaskAPI.Models;
+using TaskAPI.Services;
 
 namespace TaskAPI.Controllers
 {
@@ -9,10 +10,17 @@ namespace TaskAPI.Controllers
     [ApiController]
     public class TodosController : ControllerBase
     {
+        private TodoService _todoService;
+
+        public TodosController()
+        {
+            _todoService = new TodoService();
+        }
+
         [HttpGet("{id?}")]
         public IActionResult GetTodos(int? id)
         {
-            var my_todos = AllTodos();
+            var my_todos = _todoService.AllTodos();
 
             if (id is null)  return Ok(my_todos);
             my_todos = my_todos.Where(t => t.Id == id).ToList();
@@ -20,44 +28,6 @@ namespace TaskAPI.Controllers
             return Ok(my_todos);
         }
 
-        // Get Todos for temporary..
-        private List<Todo> AllTodos()
-        {
-            var todos = new List<Todo>();
-
-            var todo_1 = new Todo
-            {
-                Id = 1,
-                Title = "Get some books from library",
-                Description = "Read all the books and go through the knowledge",
-                Created = DateTime.Now,
-                Due = DateTime.Now.AddDays(5),
-                Status = TodoStatus.New
-            };
-            todos.Add(todo_1);
-            
-            var todo_2 = new Todo
-            {
-                Id = 2,
-                Title = "Get some books from library",
-                Description = "Read all the books and go through the knowledge",
-                Created = DateTime.Now,
-                Due = DateTime.Now.AddDays(5),
-                Status = TodoStatus.Inprogress
-            };
-            todos.Add(todo_2);
-
-            var todo_3 = new Todo
-            {
-                Id = 3,
-                Title = "Get some books from library",
-                Description = "Read all the books and go through the knowledge",
-                Created = DateTime.Now,
-                Due = DateTime.Now.AddDays(5),
-                Status = TodoStatus.Completed
-            };
-            todos.Add(todo_3);
-            return todos;
-        }
+        
     }
 }
