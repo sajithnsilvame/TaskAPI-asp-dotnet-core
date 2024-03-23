@@ -1,4 +1,9 @@
+
 ## Nuget pkg list
-  using Microsoft.EntityFrameworkCore;
-  using Pomelo.EntityFrameworkCore.MySql;
-  using MySql.Data.MySqlClient;
+ #### Microsoft.EntityFrameworkCore
+
+ #### Pomelo.EntityFrameworkCore.MySql
+
+ #### MySql.Data.MySqlClient
+
+ 
