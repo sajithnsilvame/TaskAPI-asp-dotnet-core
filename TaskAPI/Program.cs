@@ -8,8 +8,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// Add the TodoService
-builder.Services.AddScoped<ITodoRepository, TodoService>();
+// Add the TodoService [hardcode data]
+//builder.Services.AddScoped<ITodoRepository, TodoService>();
+
+// Inject the MySQL Database service
+builder.Services.AddScoped<ITodoRepository, TodoMySqlDbService>();
 
 var app = builder.Build();
 
